@@ -86,6 +86,12 @@ function k2_admin_dispatch(string $path): void
         exit;
     }
 
+    if ($path === '/admin/password') {
+        require_once K2_ROOT . '/includes/admin_password.php';
+        k2_admin_password_screen();
+        exit;
+    }
+
     http_response_code(404);
     $GLOBALS['adminNavActive'] = '';
     $pageTitle = 'Not found';

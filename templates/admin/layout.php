@@ -48,6 +48,7 @@ $favicon = k2_favicon();
                         'finance' => ['/admin/finance', 'wallet2', 'Finance'],
                         'contact_info' => ['/admin/contact-info', 'geo-alt', 'Contact info'],
                         'contacts' => ['/admin/contacts', 'envelope-open', 'Messages'],
+                        'password' => ['/admin/password', 'key', 'Password'],
                     ];
                     foreach ($nav as $key => $item) :
                         [$href, $icon, $label] = $item;

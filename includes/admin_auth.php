@@ -86,3 +86,77 @@ function k2_admin_logout(): void
         session_regenerate_id(true);
     }
 }
+
+/** Minimum length for a new admin password. */
+const K2_ADMIN_PASSWORD_MIN_LEN = 8;
+
+/**
+ * @return list<string>
+ */
+function k2_admin_password_change_validate(string $current, string $new, string $confirm): array
+{
+    $errors = [];
+    if ($current === '') {
+        $errors[] = 'Enter your current password.';
+    }
+    if ($new === '') {
+        $errors[] = 'Enter a new password.';
+    } elseif (mb_strlen($new) < K2_ADMIN_PASSWORD_MIN_LEN) {
+        $errors[] = 'New password must be at least ' . (string) K2_ADMIN_PASSWORD_MIN_LEN . ' characters.';
+    }
+    if ($new !== $confirm) {
+        $errors[] = 'New password and confirmation do not match.';
+    }
+    if ($new !== '' && $current !== '' && hash_equals($current, $new)) {
+        $errors[] = 'New password must be different from your current password.';
+    }
+
+    return $errors;
+}
+
+/**
+ * Verifies the current password and sets a new hash for the given user.
+ *
+ * @return 'ok'|'wrong_password'|'error'
+ */
+function k2_admin_change_password(int $userId, string $currentPassword, string $newPassword): string
+{
+    try {
+        $pdo = k2_db();
+        $stmt = $pdo->prepare('SELECT password_hash FROM users WHERE id = :id LIMIT 1');
+        $stmt->execute([':id' => $userId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (Throwable $e) {
+        error_log('K2 admin change password (read): ' . $e->getMessage());
+
+        return 'error';
+    }
+
+    if (
+        !$row
+        || !is_string($row['password_hash'] ?? null)
+        || !password_verify($currentPassword, $row['password_hash'])
+    ) {
+        return 'wrong_password';
+    }
+
+    $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+    if ($hash === false) {
+        return 'error';
+    }
+
+    try {
+        $upd = $pdo->prepare('UPDATE users SET password_hash = :h WHERE id = :id');
+        $upd->execute([':h' => $hash, ':id' => $userId]);
+    } catch (Throwable $e) {
+        error_log('K2 admin change password (write): ' . $e->getMessage());
+
+        return 'error';
+    }
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_regenerate_id(true);
+    }
+
+    return 'ok';
+}
