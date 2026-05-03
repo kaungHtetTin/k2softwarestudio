@@ -11,31 +11,39 @@ $homeAppRows = k2_app_list_visible_recent(3);
 ob_start();
 ?>
 <section class="hero-section position-relative overflow-hidden">
-    <div class="k2-hero-grid position-absolute top-0 start-0 w-100 h-100 opacity-25" aria-hidden="true"></div>
-    <div class="container position-relative py-5 py-lg-6">
+    <div class="hero-section-bg" aria-hidden="true">
+        <div class="hero-section-bg__base"></div>
+        <div class="hero-section-bg__pattern"></div>
+    </div>
+    <div class="k2-hero-emblem d-none d-lg-flex" aria-hidden="true">
+        <span class="k2-hero-emblem__ring">
+            <img src="<?= k2_e(k2_asset('assets/img/logo.png')) ?>" alt="" width="44" height="44" decoding="async" class="k2-hero-emblem__logo">
+        </span>
+    </div>
+    <div class="container position-relative py-5 py-lg-6 hero-section-content">
         <div class="row align-items-center gy-4">
-            <div class="col-lg-7 k2-animate">
-                <p class="text-uppercase small text-white-50 mb-2 letter-spacing">Software development studio</p>
+            <div class="col-lg-7 k2-animate k2-hero-copy">
+                <p class="text-uppercase small k2-hero-eyebrow mb-2 letter-spacing">Software development studio</p>
                 <h1 class="display-4 fw-bold mb-3">Ship software that feels inevitable</h1>
-                <p class="lead text-white-50 col-xl-10 mb-4">
+                <p class="lead k2-hero-lead col-xl-10 mb-4">
                     From discovery to launch, we pair crisp engineering with operational discipline — so your product stays fast, safe, and easy to evolve.
                 </p>
                 <div class="d-flex flex-wrap gap-3 mb-2">
                     <a class="btn btn-k2-accent btn-lg" href="<?= k2_e(k2_url('/contact')) ?>">Get in touch</a>
-                    <a class="btn btn-outline-light btn-lg" href="<?= k2_e(k2_url('/apps')) ?>">Explore apps</a>
+                    <a class="btn btn-k2-outline btn-lg" href="<?= k2_e(k2_url('/apps')) ?>">Explore apps</a>
                 </div>
                 <?php if (K2_DEBUG) : ?>
-                    <p class="small text-white-50 mb-0 mt-3">
-                        <a class="link-light text-decoration-underline" href="<?= k2_e(k2_url('/security-tests')) ?>">Security tests (dev)</a>
+                    <p class="small text-muted mb-0 mt-3">
+                        <a class="link-secondary text-decoration-underline" href="<?= k2_e(k2_url('/security-tests')) ?>">Security tests (dev)</a>
                     </p>
                 <?php endif; ?>
             </div>
-            <div class="col-lg-5 k2-animate">
+            <div class="col-lg-5 k2-animate k2-hero-visual">
                 <figure class="k2-hero-figure mb-0">
                     <img
                         src="<?= k2_e(k2_hero_image_url()) ?>"
                         alt="Engineering and product delivery"
-                        class="img-fluid rounded-4 shadow-lg k2-hero-img"
+                        class="img-fluid rounded-4 k2-hero-img"
                         width="900"
                         height="560"
                         loading="eager"

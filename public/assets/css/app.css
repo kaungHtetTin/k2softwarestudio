@@ -7,6 +7,13 @@
     --k2-body-bg: #f4f6f9;
     --k2-text-on-dark: #ffffff;
     --k2-muted-band: #eef2f7;
+    /* Hero split (reference: diagonal white / navy + gold seam) */
+    --k2-hero-navy: #031b38;
+    --k2-hero-navy-deep: #021326;
+    --k2-hero-gold: #c5a059;
+    --k2-hero-split: 48.6%;
+    --k2-hero-split-gold-end: 49.15%;
+    --k2-hero-angle: 124deg;
 }
 
 html {
@@ -99,17 +106,132 @@ main {
     }
 }
 
-/* Hero */
+/* Hero — diagonal split: white (copy) | gold seam | navy (visuals) + tech pattern */
 .hero-section {
-    background: linear-gradient(135deg, var(--k2-primary) 0%, #0d3a6b 55%, #0a2344 100%);
-    color: var(--k2-text-on-dark);
+    color: #212529;
+    border-bottom: 1px solid rgba(9, 41, 80, 0.08);
 }
 
-.k2-hero-grid {
-    background-image:
-        radial-gradient(circle at 20% 30%, rgba(220, 179, 97, 0.15) 0%, transparent 45%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+.hero-section-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
     pointer-events: none;
+}
+
+.hero-section-bg__base {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        var(--k2-hero-angle),
+        #ffffff 0%,
+        #ffffff var(--k2-hero-split),
+        var(--k2-hero-gold) var(--k2-hero-split),
+        var(--k2-secondary) var(--k2-hero-split-gold-end),
+        var(--k2-hero-navy-deep) var(--k2-hero-split-gold-end),
+        var(--k2-hero-navy) 100%
+    );
+}
+
+.hero-section-bg__pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.92;
+    /* Navy-only: triangle under top edge from seam toward top-right & bottom-right */
+    background-image:
+        radial-gradient(ellipse 70% 55% at 82% 36%, rgba(203, 163, 77, 0.16) 0%, transparent 58%),
+        repeating-linear-gradient(
+            -18deg,
+            transparent,
+            transparent 41px,
+            rgba(255, 255, 255, 0.05) 41px,
+            rgba(255, 255, 255, 0.05) 42px
+        ),
+        repeating-linear-gradient(
+            72deg,
+            transparent,
+            transparent 56px,
+            rgba(255, 255, 255, 0.035) 56px,
+            rgba(255, 255, 255, 0.035) 57px
+        );
+    clip-path: polygon(47.5% 0, 100% 0, 100% 100%);
+}
+
+.hero-section-content {
+    z-index: 1;
+}
+
+.hero-section h1,
+.hero-section .display-4 {
+    color: var(--k2-primary);
+}
+
+/* Copy stays readable on the light side of the diagonal (avoids muted gray on navy) */
+.k2-hero-copy {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section .k2-hero-eyebrow {
+    color: #5a6b82;
+}
+
+.hero-section .k2-hero-lead {
+    color: #2c3d52;
+    max-width: 38rem;
+}
+
+@media (min-width: 992px) {
+    /* Widen the white field so wrapped lines stay off the dark wedge */
+    .hero-section {
+        --k2-hero-split: 55.5%;
+        --k2-hero-split-gold-end: 56.2%;
+    }
+
+    .hero-section-bg__pattern {
+        clip-path: polygon(54% 0, 100% 0, 100% 100%);
+    }
+
+    .k2-hero-copy {
+        padding-right: 0.5rem;
+    }
+}
+
+/* Circular K2 mark on the diagonal (large screens) */
+.k2-hero-emblem {
+    position: absolute;
+    z-index: 2;
+    /* Near diagonal seam between copy column and visual */
+    left: clamp(48%, 54vw, 58%);
+    top: 44%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.k2-hero-emblem__ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.25rem;
+    height: 5.25rem;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid var(--k2-hero-gold);
+    box-shadow:
+        0 0.35rem 1.5rem rgba(2, 19, 38, 0.18),
+        0 0 0 1px rgba(9, 41, 80, 0.06);
+}
+
+.k2-hero-emblem__logo {
+    width: 2.75rem;
+    height: auto;
+    max-height: 2.75rem;
+    object-fit: contain;
+}
+
+.k2-hero-visual {
+    position: relative;
+    z-index: 1;
 }
 
 .k2-hero-figure {
@@ -121,7 +243,23 @@ main {
     height: auto;
     object-fit: cover;
     aspect-ratio: 900 / 560;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 991.98px) {
+    :root {
+        --k2-hero-split: 62%;
+        --k2-hero-split-gold-end: 63.1%;
+        --k2-hero-angle: 152deg;
+    }
+
+    .hero-section-bg__pattern {
+        clip-path: polygon(58% 0, 100% 0, 100% 100%);
+    }
+
+    .hero-section .k2-hero-lead {
+        /* Slightly softer on stacked layout; still stronger than Bootstrap muted */
+        color: #354556;
+    }
 }
 
 .btn-k2-accent {
@@ -132,6 +270,18 @@ main {
     --bs-btn-hover-border-color: #c9a455;
     --bs-btn-active-bg: #b89348;
     --bs-btn-active-border-color: #b89348;
+    font-weight: 600;
+}
+
+.btn-k2-outline {
+    --bs-btn-color: var(--k2-primary);
+    --bs-btn-border-color: rgba(9, 41, 80, 0.38);
+    --bs-btn-hover-bg: var(--k2-primary);
+    --bs-btn-hover-border-color: var(--k2-primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-active-bg: #071f3d;
+    --bs-btn-active-border-color: #071f3d;
+    --bs-btn-active-color: #fff;
     font-weight: 600;
 }
 
