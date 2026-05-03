@@ -1,0 +1,88 @@
+/**
+ * Admin shell — brand tokens match public (§3.4)
+ */
+.k2-admin-body {
+    background-color: #fff;
+}
+
+.k2-admin-login-body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--k2-body-bg, #f4f6f9) 0%, #fff 40%);
+}
+
+.k2-admin-sidebar {
+    background-color: var(--k2-primary, #092950);
+    color: #fff;
+    min-height: 100vh;
+}
+
+.k2-admin-logo {
+    height: 2rem;
+    width: auto;
+    max-width: 10rem;
+    filter: brightness(1.05);
+}
+
+.k2-admin-nav-link {
+    color: rgba(255, 255, 255, 0.78);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+}
+
+.k2-admin-nav-link:hover,
+.k2-admin-nav-link:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.k2-admin-nav-link.active {
+    color: #fff;
+    background-color: rgba(220, 179, 97, 0.2);
+}
+
+.k2-admin-nav-link i {
+    margin-right: 0.35rem;
+    opacity: 0.9;
+}
+
+.k2-admin-topbar {
+    background: #fff;
+}
+
+.k2-admin-main {
+    background-color: var(--k2-body-bg, #f4f6f9);
+}
+
+.k2-admin-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.k2-admin-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1.25rem rgba(9, 41, 80, 0.12) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .k2-admin-card:hover {
+        transform: none;
+    }
+}
+
+.k2-admin-icon-wrap {
+    width: 3rem;
+    height: 3rem;
+    background: rgba(9, 41, 80, 0.08);
+    color: var(--k2-primary, #092950);
+}
+
+.k2-admin-icon-wrap--accent {
+    background: rgba(220, 179, 97, 0.25);
+    color: var(--k2-primary, #092950);
+}
+
+@media (max-width: 991.98px) {
+    .k2-admin-sidebar {
+        min-height: auto;
+    }
+}

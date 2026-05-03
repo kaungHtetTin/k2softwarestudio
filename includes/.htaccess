@@ -1,0 +1,4 @@
+# Deny HTTP access if this folder is ever exposed (misconfigured DocumentRoot).
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>

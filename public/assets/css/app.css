@@ -1,0 +1,286 @@
+/**
+ * K2 — brand & motion (SOFTWARE_SPECIFICATION §3 / Phase 2)
+ */
+:root {
+    --k2-primary: #092950;
+    --k2-secondary: #dcb361;
+    --k2-body-bg: #f4f6f9;
+    --k2-text-on-dark: #ffffff;
+    --k2-muted-band: #eef2f7;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--k2-body-bg);
+    color: #212529;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.letter-spacing {
+    letter-spacing: 0.12em;
+}
+
+.py-lg-6 {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+}
+
+@media (min-width: 992px) {
+    .py-lg-6 {
+        padding-top: 5.5rem !important;
+        padding-bottom: 5.5rem !important;
+    }
+}
+
+/* Nav */
+.k2-navbar {
+    background-color: var(--k2-primary);
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.k2-navbar.k2-navbar--scrolled {
+    box-shadow: 0 0.5rem 1.25rem rgba(9, 41, 80, 0.25);
+}
+
+.k2-navbar .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.k2-navbar .navbar-nav .nav-link:hover,
+.k2-navbar .navbar-nav .nav-link:focus {
+    color: #fff;
+}
+
+.k2-navbar .navbar-nav .nav-link.active {
+    color: #fff;
+    background-color: rgba(220, 179, 97, 0.18);
+}
+
+.k2-logo {
+    display: block;
+    height: 2rem;
+    width: auto;
+    max-width: 10.5rem;
+}
+
+@media (min-width: 576px) {
+    .k2-logo {
+        height: 2.35rem;
+        max-width: 11.5rem;
+    }
+}
+
+.k2-logo-footer {
+    height: 1.85rem;
+    width: auto;
+    max-width: 10rem;
+}
+
+@media (min-width: 576px) {
+    .k2-logo-footer {
+        height: 2.1rem;
+        max-width: 11rem;
+    }
+}
+
+/* Hero */
+.hero-section {
+    background: linear-gradient(135deg, var(--k2-primary) 0%, #0d3a6b 55%, #0a2344 100%);
+    color: var(--k2-text-on-dark);
+}
+
+.k2-hero-grid {
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(220, 179, 97, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+.k2-hero-figure {
+    position: relative;
+}
+
+.k2-hero-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 900 / 560;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-k2-accent {
+    --bs-btn-color: var(--k2-primary);
+    --bs-btn-bg: var(--k2-secondary);
+    --bs-btn-border-color: var(--k2-secondary);
+    --bs-btn-hover-bg: #c9a455;
+    --bs-btn-hover-border-color: #c9a455;
+    --bs-btn-active-bg: #b89348;
+    --bs-btn-active-border-color: #b89348;
+    font-weight: 600;
+}
+
+/* Cards & sections */
+.k2-section-muted {
+    background-color: var(--k2-muted-band);
+}
+
+.k2-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.k2-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 2rem rgba(9, 41, 80, 0.12) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .k2-card:hover {
+        transform: none;
+    }
+}
+
+.k2-pricing-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.k2-pricing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.75rem 2rem rgba(9, 41, 80, 0.1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .k2-pricing-card:hover {
+        transform: none;
+    }
+}
+
+.k2-icon-wrap {
+    width: 3rem;
+    height: 3rem;
+    background: rgba(9, 41, 80, 0.06);
+    color: var(--k2-primary);
+}
+
+.k2-logo-pill {
+    background: #fff;
+    border: 1px solid rgba(9, 41, 80, 0.08);
+}
+
+/* FAQ */
+.k2-faq .accordion-button {
+    background-color: #fff;
+    color: var(--k2-primary);
+    box-shadow: none;
+}
+
+.k2-faq .accordion-button:not(.collapsed) {
+    background-color: rgba(220, 179, 97, 0.12);
+    color: var(--k2-primary);
+}
+
+.k2-faq .accordion-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 179, 97, 0.35);
+}
+
+#faq {
+    scroll-margin-top: 5.5rem;
+}
+
+#services {
+    scroll-margin-top: 5.5rem;
+}
+
+/* CTA band */
+.k2-cta-band {
+    background: linear-gradient(90deg, var(--k2-primary) 0%, #0d3a6b 50%, var(--k2-primary) 100%);
+}
+
+/* Inner pages */
+.k2-page-head {
+    border-bottom: 1px solid rgba(9, 41, 80, 0.08);
+    background: linear-gradient(180deg, #fff 0%, var(--k2-body-bg) 100%);
+}
+
+/* Contact honeypot — off-screen, unfocusable */
+.k2-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Scroll-driven reveal */
+.k2-animate {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.k2-animate.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Blog article body (HTML from HTMLPurifier) */
+.k2-blog-body {
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.k2-blog-body p:last-child {
+    margin-bottom: 0;
+}
+
+.k2-blog-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+.legal-prose ul {
+    padding-left: 1.35rem;
+    margin-bottom: 1rem;
+}
+
+.legal-prose ul li {
+    margin-bottom: 0.35rem;
+}
+
+.k2-blog-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a:hover .k2-blog-card {
+    transform: translateY(-3px);
+    box-shadow: 0 0.75rem 2rem rgba(9, 41, 80, 0.12) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    a:hover .k2-blog-card {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .k2-animate {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
