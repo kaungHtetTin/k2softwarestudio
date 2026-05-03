@@ -15,9 +15,13 @@ $reportsUrl = k2_url('/admin/finance/reports') . '?date_from=' . urlencode(date(
 ?>
 <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
     <div>
-        <p class="text-uppercase small text-muted mb-1 letter-spacing">Finance</p>
-        <h2 class="h4 mb-0 text-dark">Dashboard</h2>
+        <p class="text-uppercase small text-muted mb-1 letter-spacing">Overview</p>
+        <h2 class="h4 mb-0 text-dark">Financial dashboard</h2>
         <p class="text-muted small mb-0 mt-2">Amounts in <?= k2_e(k2_finance_currency()) ?>.</p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-outline-primary btn-sm" href="<?= k2_e(k2_url('/admin/finance')) ?>">Financial management</a>
+        <a class="btn btn-outline-secondary btn-sm" href="<?= k2_e(k2_url('/admin/site')) ?>">Site &amp; content</a>
     </div>
 </div>
 

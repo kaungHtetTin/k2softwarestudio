@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$pageTitle = 'Dashboard';
+$pageTitle ??= 'Dashboard';
 
 ob_start();
 ?>

@@ -33,7 +33,14 @@ function k2_admin_dispatch(string $path): void
     }
 
     if ($path === '/admin' || $path === '/admin/') {
-        $GLOBALS['adminNavActive'] = 'dashboard';
+        require_once K2_ROOT . '/includes/finance_admin.php';
+        k2_finance_admin_render_overview();
+        exit;
+    }
+
+    if ($path === '/admin/site' || $path === '/admin/site/') {
+        $GLOBALS['adminNavActive'] = '';
+        $pageTitle = 'Site & content';
         require K2_ROOT . '/templates/admin/dashboard.php';
         exit;
     }

@@ -9,7 +9,7 @@ function k2_finance_admin_dispatch(string $path): void
     $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
     if ($path === '/admin/finance' && $method === 'GET') {
-        k2_finance_admin_dashboard();
+        k2_finance_admin_management_hub();
         exit;
     }
 
@@ -179,7 +179,10 @@ function k2_finance_admin_redirect_transactions(): void
     exit;
 }
 
-function k2_finance_admin_dashboard(): void
+/**
+ * Main admin home: financial overview (balances + month summary).
+ */
+function k2_finance_admin_render_overview(): void
 {
     $pdo = k2_db();
     $accounts = k2_finance_accounts_for_admin($pdo, true);
@@ -202,9 +205,21 @@ function k2_finance_admin_dashboard(): void
     $totalRemaining = number_format($totalRemaining, 2, '.', '');
 
     $flash = k2_flash_pull('finance_admin');
-    $GLOBALS['adminNavActive'] = 'finance';
-    $pageTitle = 'Finance';
+    $GLOBALS['adminNavActive'] = 'dashboard';
+    $pageTitle = 'Dashboard';
     require K2_ROOT . '/templates/admin/finance/dashboard.php';
+    exit;
+}
+
+/**
+ * Finance section hub: links to accounts, categories, transactions, reports, transfers.
+ */
+function k2_finance_admin_management_hub(): void
+{
+    $flash = k2_flash_pull('finance_admin');
+    $GLOBALS['adminNavActive'] = 'finance';
+    $pageTitle = 'Financial management';
+    require K2_ROOT . '/templates/admin/finance/management.php';
     exit;
 }
 
