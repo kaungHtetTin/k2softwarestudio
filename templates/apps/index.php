@@ -24,13 +24,14 @@ ob_start();
             <?php foreach ($rows as $row) :
                 $slug = (string) ($row['slug'] ?? '');
                 $link = k2_url('/apps/' . rawurlencode($slug));
+                $coverImage = trim((string) ($row['cover_image_path'] ?? ''));
                 ?>
                 <div class="col-md-6 col-lg-4">
                     <a href="<?= k2_e($link) ?>" class="text-decoration-none text-reset d-block h-100">
                         <article class="card border-0 shadow-sm h-100 k2-blog-card">
-                            <?php if (!empty($row['icon_path'])) : ?>
+                            <?php if ($coverImage !== '') : ?>
                                 <div class="ratio ratio-1x1 bg-light overflow-hidden" style="max-height: 200px;">
-                                    <img src="<?= k2_e(k2_asset((string) $row['icon_path'])) ?>" alt="" class="object-fit-cover" loading="lazy" width="400" height="400">
+                                    <img src="<?= k2_e(k2_asset($coverImage)) ?>" alt="" class="object-fit-cover" loading="lazy" width="400" height="400">
                                 </div>
                             <?php else : ?>
                                 <div class="ratio ratio-16x9 bg-light d-flex align-items-center justify-content-center text-muted">

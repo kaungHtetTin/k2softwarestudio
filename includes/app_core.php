@@ -56,7 +56,14 @@ function k2_app_list_visible(): array
 {
     $pdo = k2_db();
     $stmt = $pdo->query(
-        'SELECT id, title, slug, short_description, long_description, icon_path, external_url, sort_order
+        'SELECT id, title, slug, short_description, long_description, icon_path, external_url, sort_order,
+                (
+                    SELECT s.image_path
+                    FROM app_screenshots s
+                    WHERE s.app_id = app_items.id
+                    ORDER BY s.sort_order ASC, s.id ASC
+                    LIMIT 1
+                ) AS cover_image_path
          FROM app_items
          WHERE is_visible = 1
          ORDER BY sort_order ASC, title ASC'
