@@ -42,11 +42,6 @@ ob_start();
                 <h1 class="display-6 fw-bold text-dark mb-3"><?= k2_e($title) ?></h1>
                 <p class="lead text-muted mb-0"><?= k2_e((string) ($app['short_description'] ?? '')) ?></p>
             </div>
-            <?php if (!empty($app['icon_path'])) : ?>
-                <div class="col-lg-4 text-lg-end">
-                    <img src="<?= k2_e(k2_asset((string) $app['icon_path'])) ?>" alt="" class="rounded-3 border shadow-sm" width="160" height="160" style="object-fit: cover;" loading="lazy">
-                </div>
-            <?php endif; ?>
         </div>
     </div>
 </div>
